@@ -116,10 +116,7 @@ most_audience_count = df["total_audi"].max()
 st.subheader("이 그래프로 알 수 있는 것")
 
 st.write(
-f"대부분의 영화는 총 관객이 {most_common_bin.left:,.0f}명~"
-f"{most_common_bin.right:,.0f}명인 구간에 몰려 있고, "
-f"가장 관객이 많은 영화는 '{most_audience_movie}'로 "
-f"총 {most_audience_count:,.0f}명을 기록했다."
-)
+대부분의 영화는 총 관객이 비슷한 구간에 몰려 있고, 가장 관객이 많은 영화는 **「왕과 사는 남자」**이다.
+
 
 st.divider()
