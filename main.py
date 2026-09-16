@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -31,7 +32,7 @@ def load_data():
         errors="coerce"
     )
 
-    # 장르가 여러 개 적혀 있는 경우 첫 번째 장르만 사용
+    # 여러 장르가 있는 경우 첫 번째 장르만 사용
     df["genre"] = df["genre"].fillna("").astype(str)
     df["genre"] = df["genre"].str.split("|").str[0].str.strip()
 
@@ -77,18 +78,5 @@ fig.update_layout(
     legend_title_text="장르"
 )
 
-st.plotly_chart(fig, use_container_width=True)
-
-
-# ─────────────────────────────
-# 이 그래프로 알 수 있는 것
-# ─────────────────────────────
-st.subheader("이 그래프로 알 수 있는 것")
-
-st.write("")
-
-
-# ─────────────────────────────
-# 다음 그래프를 위한 구역
-# ─────────────────────────────
-st.divider()
+st.plotly_chart(fig, use_container_width=True_
+```
