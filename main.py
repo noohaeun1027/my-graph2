@@ -9,7 +9,7 @@ layout="wide"
 
 st.title("영화 데이터 그래프 도감 2 - 분포와 관계")
 
-DATA_URL = "https://raw.githubusercontent.com/greatsong/modudata/main/data/kobis_movies.csv"
+DATA_URL = "https://raw.githubusercontent.com/greatsong/modudata/main/data/kobis_movies.csv")
 
 @st.cache_data
 def load_data():
@@ -30,8 +30,6 @@ return df
 ```
 
 df = load_data()
-
-# 그래프 1. 장르별 영화 편수
 
 st.header("1. 장르별 영화 편수")
 
@@ -61,8 +59,6 @@ legend_title_text="장르"
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-# 이 그래프로 알 수 있는 것
 
 st.subheader("이 그래프로 알 수 있는 것")
 
