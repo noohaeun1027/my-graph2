@@ -129,4 +129,44 @@ st.plotly_chart(fig4, use_container_width=True)
 st.subheader("이 그래프로 알 수 있는 것")
 st.write("개봉일 스크린수가 많을수록 총 관객도 많아지는 경향이 있는지 확인할 수 있다.")
 
+# 그래프 5
+
+st.divider()
+
+st.header("5. 장르별 총 관객 분포")
+
+# 장르별 영화 편수가 10편 이상인 장르만 선택
+
+genre_counts = df["genre"].value_counts()
+
+valid_genres = genre_counts[genre_counts >= 10].index
+
+df_box = df[df["genre"].isin(valid_genres)].copy()
+
+fig5 = px.box(
+df_box,
+x="genre",
+y="total_audi",
+points="outliers",
+hover_name="movieNm",
+title="영화가 10편 이상인 장르의 총 관객 분포",
+labels={
+"genre": "장르",
+"total_audi": "총 관객"
+}
+)
+
+fig5.update_traces(
+hovertemplate=(
+"<b>%{hovertext}</b><br>"
+"총 관객: %{y:,}명"
+"<extra></extra>"
+)
+)
+
+st.plotly_chart(fig5, use_container_width=True)
+
+st.subheader("이 그래프로 알 수 있는 것")
+st.write("장르에 따라 총 관객 수의 분포와 차이가 다르게 나타나는 것을 알 수 있다.")
+
 st.divider()
