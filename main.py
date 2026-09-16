@@ -46,7 +46,9 @@ st.plotly_chart(fig1, use_container_width=True)
 
 st.subheader("이 그래프로 알 수 있는 것")
 
-st.write("특정 장르의 영화가 다른 장르보다 더 많이 있다는 것을 알 수 있다.")
+st.write(
+"특정 장르의 영화가 다른 장르보다 더 많이 있다는 것을 알 수 있다."
+)
 
 # 그래프 2
 
@@ -69,6 +71,55 @@ st.plotly_chart(fig2, use_container_width=True)
 
 st.subheader("이 그래프로 알 수 있는 것")
 
-st.write("같은 장르 안에서도 영화마다 총 관객 수에 큰 차이가 있다는 것을 알 수 있다.")
+st.write(
+"같은 장르 안에서도 영화마다 총 관객 수에 큰 차이가 있다는 것을 알 수 있다."
+)
+
+# 그래프 3
+
+st.divider()
+
+st.header("3. 총 관객 수의 분포")
+
+fig3 = px.histogram(
+df,
+x="total_audi",
+nbins=20,
+title="영화별 총 관객 수 분포",
+labels={
+"total_audi": "총 관객 수",
+"count": "영화 편수"
+}
+)
+
+fig3.update_traces(
+hovertemplate=(
+"총 관객 수: %{x:,}명<br>"
+"영화 편수: %{y}편"
+"<extra></extra>"
+)
+)
+
+st.plotly_chart(fig3, use_container_width=True)
+
+# 그래프 3 분석 문구
+
+most_common_bin = pd.cut(df["total_audi"], bins=20).value_counts().idxmax()
+
+most_audience_movie = df.loc[
+df["total_audi"].idxmax(),
+"movieNm"
+]
+
+most_audience_count = df["total_audi"].max()
+
+st.subheader("이 그래프로 알 수 있는 것")
+
+st.write(
+f"대부분의 영화는 총 관객이 {most_common_bin.left:,.0f}명~"
+f"{most_common_bin.right:,.0f}명인 구간에 몰려 있고, "
+f"가장 관객이 많은 영화는 '{most_audience_movie}'로 "
+f"총 {most_audience_count:,.0f}명을 기록했다."
+)
 
 st.divider()
