@@ -135,10 +135,7 @@ st.divider()
 
 st.header("5. 장르별 총 관객 분포")
 
-# 장르별 영화 편수가 10편 이상인 장르만 선택
-
 genre_counts = df["genre"].value_counts()
-
 valid_genres = genre_counts[genre_counts >= 10].index
 
 df_box = df[df["genre"].isin(valid_genres)].copy()
@@ -168,5 +165,43 @@ st.plotly_chart(fig5, use_container_width=True)
 
 st.subheader("이 그래프로 알 수 있는 것")
 st.write("장르에 따라 총 관객 수의 분포와 차이가 다르게 나타나는 것을 알 수 있다.")
+
+# 그래프 6
+
+st.divider()
+
+st.header("6. 개봉일 스크린수와 총 관객의 버블 그래프")
+
+fig6 = px.scatter(
+df,
+x="first_scrn",
+y="total_audi",
+size="first_week_audi",
+color="genre",
+hover_name="movieNm",
+size_max=50,
+title="개봉일 스크린수와 총 관객의 관계",
+labels={
+"first_scrn": "개봉일 스크린수",
+"total_audi": "총 관객",
+"first_week_audi": "첫 주 관객",
+"genre": "장르"
+}
+)
+
+fig6.update_traces(
+hovertemplate=(
+"<b>%{hovertext}</b><br>"
+"개봉일 스크린수: %{x:,}개<br>"
+"총 관객: %{y:,}명<br>"
+"첫 주 관객: %{marker.size:,}명"
+"<extra></extra>"
+)
+)
+
+st.plotly_chart(fig6, use_container_width=True)
+
+st.subheader("이 그래프로 알 수 있는 것")
+st.write("개봉일 스크린수와 총 관객의 관계뿐만 아니라 첫 주 관객이 많은 영화도 함께 비교할 수 있다.")
 
 st.divider()
