@@ -232,3 +232,40 @@ st.subheader("이 그래프로 알 수 있는 것")
 st.write("제작 국가마다 어떤 장르의 영화가 많이 만들어졌는지 비교할 수 있다.")
 
 st.divider()
+
+# 그래프 8
+
+st.divider()
+
+st.header("8. 개봉 첫 주 관객이 가장 많았던 영화가 총 관객도 가장 많을까?")
+
+fig8 = px.scatter(
+df,
+x="first_week_audi",
+y="total_audi",
+size="first_week_audi",
+color="genre",
+hover_name="movieNm",
+size_max=50,
+title="개봉 첫 주 관객이 가장 많았던 영화가 총 관객도 가장 많을까?",
+labels={
+"first_week_audi": "개봉 첫 주 관객",
+"total_audi": "총 관객",
+"genre": "장르"
+}
+)
+
+fig8.update_traces(
+hovertemplate=(
+"<b>%{hovertext}</b><br>"
+"개봉 첫 주 관객: %{x:,}명<br>"
+"총 관객: %{y:,}명"
+"<extra></extra>"
+)
+)
+
+st.plotly_chart(fig8, use_container_width=True)
+
+st.subheader("이 그래프로 알 수 있는 것")
+st.write("개봉 첫 주 관객이 많은 영화가 총 관객도 많은지 두 값을 비교해 볼 수 있다.")
+
