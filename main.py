@@ -22,6 +22,8 @@ errors="coerce"
 df["genre"] = df["genre"].fillna("").astype(str)
 df["genre"] = df["genre"].str.split("|").str[0].str.strip()
 
+df["nation"] = df["nation"].fillna("").astype(str).str.strip()
+
 # 그래프 1
 
 st.header("1. 장르별 영화 편수")
@@ -203,5 +205,30 @@ st.plotly_chart(fig6, use_container_width=True)
 
 st.subheader("이 그래프로 알 수 있는 것")
 st.write("개봉일 스크린수와 총 관객의 관계뿐만 아니라 첫 주 관객이 많은 영화도 함께 비교할 수 있다.")
+
+# 그래프 7
+
+st.divider()
+
+st.header("7. 제작 국가에서 장르로 내려가는 영화 분포")
+
+fig7 = px.sunburst(
+df,
+path=["nation", "genre"],
+title="제작 국가 → 장르별 영화 분포"
+)
+
+fig7.update_traces(
+hovertemplate=(
+"<b>%{label}</b><br>"
+"영화 편수: %{value}편"
+"<extra></extra>"
+)
+)
+
+st.plotly_chart(fig7, use_container_width=True)
+
+st.subheader("이 그래프로 알 수 있는 것")
+st.write("제작 국가마다 어떤 장르의 영화가 많이 만들어졌는지 비교할 수 있다.")
 
 st.divider()
